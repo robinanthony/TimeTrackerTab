@@ -91,6 +91,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return title!;
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+            print("clic sur une tâche en cours : "+self.currentOpenTasks[indexPath.row].name!);
+        }
+        if indexPath.section == 1 {
+            print("clic sur fixed project : "+self.fixedProjects[indexPath.row].name!);
+        }
+        if indexPath.section == 2 {
+            print("clic sur user project : "+self.currentProjects[indexPath.row].name!);
+        }
+    }
+    
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
         loadDataInCoreData();
     }
