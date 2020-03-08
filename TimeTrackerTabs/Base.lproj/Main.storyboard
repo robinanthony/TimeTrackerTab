@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,9 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sFT-EU-O07">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFT-EU-O07">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem systemItem="add" id="ZzW-zr-NYU">
                                         <connections>
@@ -32,9 +32,8 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="X5p-bq-ieL"/>
                                 </items>
                             </toolbar>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tGv-h5-dZf">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tGv-h5-dZf">
                                 <rect key="frame" x="0.0" y="10" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Overview" id="O9u-4s-s4V">
                                         <barButtonItem key="leftBarButtonItem" title="About" id="5Y5-OL-0v6">
@@ -50,16 +49,67 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTJ-23-Bv3">
+                                <rect key="frame" x="0.0" y="54" width="375" height="55"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="Iuj-Si-GGP"/>
+                                </constraints>
+                                <state key="normal" title="Quick start"/>
+                                <connections>
+                                    <action selector="handleQuickStart:" destination="BYZ-38-t0r" eventType="touchDown" id="CgD-Dp-0R1"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Sdz-OQ-047">
+                                <rect key="frame" x="0.0" y="108" width="375" height="515"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableViewProjectsCell" textLabel="COy-1p-H0s" style="IBUITableViewCellStyleDefault" id="XQI-Zx-KXW">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XQI-Zx-KXW" id="UKf-5m-r1i">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="COy-1p-H0s">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tGv-h5-dZf" firstAttribute="leading" secondItem="lTJ-23-Bv3" secondAttribute="leading" id="7d7-U5-PJ5"/>
+                            <constraint firstItem="sFT-EU-O07" firstAttribute="top" secondItem="Sdz-OQ-047" secondAttribute="bottom" id="Fqy-p3-pS7"/>
+                            <constraint firstItem="tGv-h5-dZf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-10" id="GHV-ln-DZ7"/>
+                            <constraint firstItem="tGv-h5-dZf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LMB-Ev-Rkm"/>
+                            <constraint firstItem="sFT-EU-O07" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="LhQ-Y1-ThQ"/>
+                            <constraint firstItem="Sdz-OQ-047" firstAttribute="top" secondItem="tGv-h5-dZf" secondAttribute="bottom" constant="54" id="Rx9-A5-Fzd"/>
+                            <constraint firstAttribute="trailing" secondItem="tGv-h5-dZf" secondAttribute="trailing" id="TF9-R4-t32"/>
+                            <constraint firstItem="lTJ-23-Bv3" firstAttribute="top" secondItem="tGv-h5-dZf" secondAttribute="bottom" id="W43-Eb-IaZ"/>
+                            <constraint firstItem="Sdz-OQ-047" firstAttribute="leading" secondItem="sFT-EU-O07" secondAttribute="leading" id="XMD-4l-uOB"/>
+                            <constraint firstItem="tGv-h5-dZf" firstAttribute="trailing" secondItem="lTJ-23-Bv3" secondAttribute="trailing" id="ZRw-H0-jPa"/>
+                            <constraint firstItem="lTJ-23-Bv3" firstAttribute="leading" secondItem="Sdz-OQ-047" secondAttribute="leading" id="bqq-LB-RSH"/>
+                            <constraint firstItem="lTJ-23-Bv3" firstAttribute="trailing" secondItem="Sdz-OQ-047" secondAttribute="trailing" id="gz7-Ha-MK1"/>
+                            <constraint firstItem="Sdz-OQ-047" firstAttribute="trailing" secondItem="sFT-EU-O07" secondAttribute="trailing" id="hnh-dN-3vI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="tableViewProjects" destination="Sdz-OQ-047" id="P0r-9N-dPB"/>
                         <outlet property="totalTimeLabel" destination="efR-QQ-S3S" id="Qws-5E-K6Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="116" y="117.39130434782609"/>
         </scene>
     </scenes>
 </document>

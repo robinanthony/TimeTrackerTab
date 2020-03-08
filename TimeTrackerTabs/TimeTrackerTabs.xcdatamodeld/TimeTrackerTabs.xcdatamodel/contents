@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Project" representedClassName="Project" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="tasks" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="project" inverseEntity="Task" syncable="YES"/>
     </entity>
     <entity name="Task" representedClassName="Task" syncable="YES" codeGenerationType="class">
@@ -15,8 +16,8 @@
         <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="time" inverseEntity="Task" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Project" positionX="-270" positionY="-372" width="128" height="73"/>
-        <element name="Time" positionX="-54" positionY="-9" width="128" height="88"/>
+        <element name="Project" positionX="-270" positionY="-372" width="128" height="90"/>
         <element name="Task" positionX="-225" positionY="-189" width="128" height="88"/>
+        <element name="Time" positionX="-54" positionY="-9" width="128" height="88"/>
     </elements>
 </model>
