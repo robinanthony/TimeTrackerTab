@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var totalTimeLabel: UIBarButtonItem!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -22,18 +22,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var currentProjects:[Project] = [];
     
-    @IBAction func handleNewProject(_ sender: Any) {
-        let currentDate = Date();
-        print("Ajout d'un nouveau projet ! ");
-        print(currentDate);
-    }
-    
     @IBAction func handleAbout(_ sender: Any) {
         print("De quoi parle cette application ?");
     }
     
     @IBAction func handleAllProjectEdit(_ sender: Any) {
         print("Ze veut editer tous les projets !");
+    }
+    
+    @IBAction func handleAddProject(_ sender: Any) {
+        performSegue(withIdentifier: "addNewProject", sender: self);
     }
     
     @IBAction func handleQuickStart(_ sender: Any) {
@@ -93,17 +91,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return title!;
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        tableViewProjects.dataSource = self;
-        tableViewProjects.delegate = self;
-        
-        createMoocData();
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {
+        loadDataInCoreData();
+    }
+    
+    func loadDataInCoreData() {
+        //        createMoocData();
         getFixedProjectsList();
         getUserProjectsList();
         
         totalTimeLabel.title = "Total 0:00";
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad();
+        // Do any additional setup after loading the view, typically from a nib.
+        tableViewProjects.dataSource = self;
+        tableViewProjects.delegate = self;
+        
+        loadDataInCoreData();
     }
     
     func getFixedProjectsList(){
@@ -155,14 +161,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func createMoocData(){
         deleteAllProjects();
         
-//        let allTasks = Project(context: context);
-//        allTasks.name = "All Tasks";
-//        allTasks.type = "fixed";
-//
-//        let singleTasks = Project(context: context);
-//        singleTasks.name = "Single Tasks";
-//        singleTasks.type = "fixed";
-        
         let newProject = Project(context: context);
         newProject.name = "IOS";
         newProject.type = "user";
@@ -193,6 +191,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("Error while saving with CoreData : \(error)")
         }
     }
-
 }
 

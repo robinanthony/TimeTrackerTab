@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		482D9A292415563000A85A13 /* AddProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D9A282415563000A85A13 /* AddProjectViewController.swift */; };
 		4857CBD72413EB100076510A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857CBD62413EB100076510A /* AppDelegate.swift */; };
-		4857CBD92413EB100076510A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857CBD82413EB100076510A /* ViewController.swift */; };
+		4857CBD92413EB100076510A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4857CBD82413EB100076510A /* MainViewController.swift */; };
 		4857CBDC2413EB100076510A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4857CBDA2413EB100076510A /* Main.storyboard */; };
 		4857CBDF2413EB100076510A /* TimeTrackerTabs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4857CBDD2413EB100076510A /* TimeTrackerTabs.xcdatamodeld */; };
 		4857CBE12413EB100076510A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4857CBE02413EB100076510A /* Assets.xcassets */; };
@@ -16,9 +17,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		482D9A282415563000A85A13 /* AddProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewController.swift; sourceTree = "<group>"; };
 		4857CBD32413EB100076510A /* TimeTrackerTabs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTrackerTabs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4857CBD62413EB100076510A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4857CBD82413EB100076510A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4857CBD82413EB100076510A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4857CBDB2413EB100076510A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4857CBDE2413EB100076510A /* TimeTrackerTabs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TimeTrackerTabs.xcdatamodel; sourceTree = "<group>"; };
 		4857CBE02413EB100076510A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,8 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				4857CBD62413EB100076510A /* AppDelegate.swift */,
-				4857CBD82413EB100076510A /* ViewController.swift */,
+				4857CBD82413EB100076510A /* MainViewController.swift */,
 				4857CBDA2413EB100076510A /* Main.storyboard */,
+				482D9A282415563000A85A13 /* AddProjectViewController.swift */,
 				4857CBE02413EB100076510A /* Assets.xcassets */,
 				4857CBE22413EB100076510A /* LaunchScreen.storyboard */,
 				4857CBE52413EB100076510A /* Info.plist */,
@@ -139,7 +142,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4857CBD92413EB100076510A /* ViewController.swift in Sources */,
+				482D9A292415563000A85A13 /* AddProjectViewController.swift in Sources */,
+				4857CBD92413EB100076510A /* MainViewController.swift in Sources */,
 				4857CBDF2413EB100076510A /* TimeTrackerTabs.xcdatamodeld in Sources */,
 				4857CBD72413EB100076510A /* AppDelegate.swift in Sources */,
 			);

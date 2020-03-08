@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TimeTrackerTabs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="TimeTrackerTabs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,7 +24,8 @@
                                 <items>
                                     <barButtonItem systemItem="add" id="ZzW-zr-NYU">
                                         <connections>
-                                            <action selector="handleNewProject:" destination="BYZ-38-t0r" id="b4J-7j-VSM"/>
+                                            <action selector="handleAddProject:" destination="BYZ-38-t0r" id="Xiy-vK-CCC"/>
+                                            <segue destination="Jd0-3T-K24" kind="presentation" identifier="addNewProject" id="8t7-2o-j0g"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="GZg-j1-y7h"/>
@@ -38,7 +39,7 @@
                                     <navigationItem title="Overview" id="O9u-4s-s4V">
                                         <barButtonItem key="leftBarButtonItem" title="About" id="5Y5-OL-0v6">
                                             <connections>
-                                                <action selector="handleAbout:" destination="BYZ-38-t0r" id="AM2-8I-Wf7"/>
+                                                <action selector="handleAbout:" destination="BYZ-38-t0r" id="2Gj-QV-DEn"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="YfE-2f-rrm">
@@ -103,13 +104,66 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="tableViewProjects" destination="Sdz-OQ-047" id="P0r-9N-dPB"/>
-                        <outlet property="totalTimeLabel" destination="efR-QQ-S3S" id="Qws-5E-K6Z"/>
+                        <outlet property="tableViewProjects" destination="Sdz-OQ-047" id="0b0-ZA-Xef"/>
+                        <outlet property="totalTimeLabel" destination="efR-QQ-S3S" id="u2h-io-id0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="116" y="117.39130434782609"/>
+            <point key="canvasLocation" x="-127" y="116"/>
+        </scene>
+        <!--Add Project View Controller-->
+        <scene sceneID="bQU-h5-o2S">
+            <objects>
+                <viewController storyboardIdentifier="AddProjectViewController" id="Jd0-3T-K24" customClass="AddProjectViewController" customModule="TimeTrackerTabs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sGb-lb-8lV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SeE-Qa-L4U">
+                                <rect key="frame" x="0.0" y="9" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="New Project" id="cfg-6q-yIW">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="GSD-VX-OHF">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="5RN-Kd-Ddz"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="dAj-k3-0wd">
+                                            <connections>
+                                                <action selector="saveNewProject:" destination="Jd0-3T-K24" id="yR2-aA-4Hp"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Project name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zpd-34-eta">
+                                <rect key="frame" x="16" y="67" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SeE-Qa-L4U" firstAttribute="leading" secondItem="sGb-lb-8lV" secondAttribute="leading" id="7pE-M6-Ong"/>
+                            <constraint firstAttribute="trailing" secondItem="SeE-Qa-L4U" secondAttribute="trailing" id="9Wk-zy-qqS"/>
+                            <constraint firstItem="Zpd-34-eta" firstAttribute="leading" secondItem="sGb-lb-8lV" secondAttribute="leadingMargin" id="R4t-VF-xBb"/>
+                            <constraint firstItem="SeE-Qa-L4U" firstAttribute="centerX" secondItem="Zpd-34-eta" secondAttribute="centerX" id="Vsj-Qt-DOi"/>
+                            <constraint firstItem="Zpd-34-eta" firstAttribute="top" secondItem="SeE-Qa-L4U" secondAttribute="bottom" constant="14" id="bWb-bd-8Wc"/>
+                            <constraint firstItem="wCo-ad-mZh" firstAttribute="bottom" secondItem="Zpd-34-eta" secondAttribute="bottom" constant="570" id="lih-2b-8PB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="wCo-ad-mZh"/>
+                    </view>
+                    <connections>
+                        <outlet property="newProjectName" destination="Zpd-34-eta" id="qSY-wM-vwu"/>
+                        <segue destination="Tt5-wW-uSh" kind="unwind" identifier="addNewProject" unwindAction="unwindToMainWithSegue:" id="xRh-Cs-7bR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lwz-9q-rM0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Tt5-wW-uSh" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="854" y="116"/>
         </scene>
     </scenes>
 </document>
