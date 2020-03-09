@@ -102,6 +102,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if indexPath.row == 0 {
                 performSegue(withIdentifier: "showAllTasks", sender: self);
             }
+            if indexPath.row == 1 {
+                self.segueCurrentProject = self.fixedProjects[indexPath.row];
+                performSegue(withIdentifier: "showDetailProject", sender: self);
+            }
             print("clic sur fixed project : "+self.fixedProjects[indexPath.row].name!);
         }
         if indexPath.section == 2 {
