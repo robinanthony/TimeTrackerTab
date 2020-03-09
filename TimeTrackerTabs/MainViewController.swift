@@ -60,7 +60,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Paramétrage de la cellule par apport à un 'indexPath' donné grâce à 'indexPath.section' et 'indexPath.row'
+        // Paramétrage de la cellule par rapport à un 'indexPath' donné grâce à 'indexPath.section' et 'indexPath.row'
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewProjectsCell", for: indexPath);
         
         if indexPath.section == 0 {
@@ -92,10 +92,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // gestion des clics sur une cellule
         if indexPath.section == 0{
             print("clic sur une tâche en cours : "+self.currentOpenTasks[indexPath.row].name!);
         }
         if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                performSegue(withIdentifier: "showAllTasks", sender: self);
+            }
             print("clic sur fixed project : "+self.fixedProjects[indexPath.row].name!);
         }
         if indexPath.section == 2 {
@@ -130,6 +134,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var results:[Project];
         do {
             requete.predicate = NSPredicate(format: "type == %@", "fixed");
+            requete.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)];
             results = try context.fetch(requete);
         }
         catch {
