@@ -35,7 +35,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FkX-tL-oHR">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem systemItem="add" id="28k-qH-Mnd"/>
+                                    <barButtonItem systemItem="add" id="28k-qH-Mnd">
+                                        <connections>
+                                            <action selector="addNewTask:" destination="OZk-LQ-Y0N" id="8U4-ZH-pU9"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ZEF-iX-BDw"/>
                                     <barButtonItem title="Total X:XX" id="5nK-7G-2LO"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="3hM-qY-ten"/>
@@ -76,6 +80,7 @@
                         <outlet property="tableViewTasks" destination="6bc-rf-fHW" id="YAF-jm-y1v"/>
                         <outlet property="titleLabel" destination="fgi-p2-jKy" id="zzd-Hf-DVg"/>
                         <outlet property="totalTimeLabel" destination="5nK-7G-2LO" id="RgH-ax-xgr"/>
+                        <segue destination="3b1-Ox-nmZ" kind="presentation" identifier="addNewTask" id="zMc-5b-iB1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKZ-vJ-w8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -89,13 +94,61 @@
                     <view key="view" contentMode="scaleToFill" id="M06-jB-elq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFH-Vv-q2i">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="New Task" id="q3A-8H-HO8">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="cancel" id="gFu-Oj-5aH">
+                                            <connections>
+                                                <action selector="handleCancel:" destination="3b1-Ox-nmZ" id="6II-it-yqf"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ml2-bN-geg">
+                                            <connections>
+                                                <action selector="handleSave:" destination="3b1-Ox-nmZ" id="g3v-YM-fCi"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WfN-jh-A3E">
+                                <rect key="frame" x="16" y="75" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QyC-9z-6FO"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Srg-6X-Eql">
+                                <rect key="frame" x="0.0" y="123" width="375" height="301"/>
+                            </pickerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WfN-jh-A3E" firstAttribute="top" secondItem="HFH-Vv-q2i" secondAttribute="bottom" constant="31" id="K41-Dg-Au9"/>
+                            <constraint firstItem="HFH-Vv-q2i" firstAttribute="leading" secondItem="M06-jB-elq" secondAttribute="leading" id="N2l-Zv-odC"/>
+                            <constraint firstItem="P5t-Ow-UQ0" firstAttribute="bottom" secondItem="Srg-6X-Eql" secondAttribute="bottom" constant="243" id="N7C-WT-7xY"/>
+                            <constraint firstAttribute="trailing" secondItem="HFH-Vv-q2i" secondAttribute="trailing" id="PGg-LL-c71"/>
+                            <constraint firstItem="HFH-Vv-q2i" firstAttribute="centerX" secondItem="WfN-jh-A3E" secondAttribute="centerX" id="ToU-LK-mGb"/>
+                            <constraint firstItem="HFH-Vv-q2i" firstAttribute="leading" secondItem="Srg-6X-Eql" secondAttribute="leading" id="ZfD-G9-0vl"/>
+                            <constraint firstItem="Srg-6X-Eql" firstAttribute="top" secondItem="WfN-jh-A3E" secondAttribute="bottom" constant="18" id="aLC-0W-eJX"/>
+                            <constraint firstItem="WfN-jh-A3E" firstAttribute="leading" secondItem="M06-jB-elq" secondAttribute="leadingMargin" id="dZX-BZ-uiT"/>
+                            <constraint firstItem="HFH-Vv-q2i" firstAttribute="trailing" secondItem="Srg-6X-Eql" secondAttribute="trailing" id="qvp-1r-M71"/>
+                            <constraint firstItem="HFH-Vv-q2i" firstAttribute="top" secondItem="M06-jB-elq" secondAttribute="top" id="yxn-pI-6PL"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="P5t-Ow-UQ0"/>
                     </view>
+                    <connections>
+                        <outlet property="pickerViewProjects" destination="Srg-6X-Eql" id="2rP-me-kTP"/>
+                        <segue destination="AR0-Ku-jOE" kind="unwind" identifier="unwindToDetailProject" unwindAction="unwindToDetailProjectWithSegue:" id="61P-Hf-Qlb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ve-IJ-Kj9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="AR0-Ku-jOE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1009" y="-654"/>
+            <point key="canvasLocation" x="-1008.8" y="-654.42278860569718"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -319,7 +372,7 @@
                     </view>
                     <connections>
                         <outlet property="newProjectName" destination="Zpd-34-eta" id="qSY-wM-vwu"/>
-                        <segue destination="Tt5-wW-uSh" kind="unwind" identifier="addNewProject" unwindAction="unwindToMainWithSegue:" id="xRh-Cs-7bR"/>
+                        <segue destination="Tt5-wW-uSh" kind="unwind" identifier="unwindToMain" unwindAction="unwindToMainWithSegue:" id="xRh-Cs-7bR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lwz-9q-rM0" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -27,7 +27,11 @@ class DetailProjectViewController: UIViewController, UITableViewDataSource, UITa
         cell.textLabel?.text = self.currentTasks[indexPath.row].name;
         return cell;
     }
-
+    
+    @IBAction func addNewTask(_ sender: Any) {
+        performSegue(withIdentifier: "addNewTask", sender: self);
+    }
+    
     func loadDataInCoreData(){
         // get dans CoreData la liste des tâches du projet donné
         self.currentTasks = [];
@@ -47,5 +51,17 @@ class DetailProjectViewController: UIViewController, UITableViewDataSource, UITa
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func unwindToDetailProject(segue: UIStoryboardSegue) {
+        loadDataInCoreData();
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addNewTask" {
+            let destView = segue.destination as! AddTaskViewController;
+            destView.originalSelectedProject = self.currentProject;
+            destView.unwindIdentifier = "unwindToDetailProject";
+        }
     }
 }

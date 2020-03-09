@@ -23,7 +23,7 @@ class AddProjectViewController: UIViewController {
             newProject.type = "user";
             
             saveData();
-            self.performSegue(withIdentifier: "addNewProject", sender: self);
+            self.performSegue(withIdentifier: "unwindToMain", sender: self);
         }
     }
     
