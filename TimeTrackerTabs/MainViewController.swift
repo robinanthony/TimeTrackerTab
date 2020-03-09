@@ -22,6 +22,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var currentProjects:[Project] = [];
     
+    var segueCurrentProject: Project! = nil;
+    
     @IBAction func handleAbout(_ sender: Any) {
         print("De quoi parle cette application ?");
     }
@@ -103,6 +105,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             print("clic sur fixed project : "+self.fixedProjects[indexPath.row].name!);
         }
         if indexPath.section == 2 {
+            self.segueCurrentProject = self.currentProjects[indexPath.row];
+            performSegue(withIdentifier: "showDetailProject", sender: self);
             print("clic sur user project : "+self.currentProjects[indexPath.row].name!);
         }
     }
@@ -115,8 +119,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //        createMoocData();
         getFixedProjectsList();
         getUserProjectsList();
-        
-        totalTimeLabel.title = "Total 0:00";
     }
     
     override func viewDidLoad() {
@@ -126,6 +128,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableViewProjects.delegate = self;
         
         loadDataInCoreData();
+        self.totalTimeLabel.title = "Total 0:00";
     }
     
     func getFixedProjectsList(){
@@ -206,6 +209,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             print("Save in database CoreData successful")
         } catch {
             print("Error while saving with CoreData : \(error)")
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetailProject" {
+            let destView = segue.destination as! DetailProjectViewController;
+            destView.currentProject = self.segueCurrentProject;
         }
     }
 }

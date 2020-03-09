@@ -11,6 +11,77 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Detail Project View Controller-->
+        <scene sceneID="5Sz-2Z-yFd">
+            <objects>
+                <viewController id="OZk-LQ-Y0N" customClass="DetailProjectViewController" customModule="TimeTrackerTabs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Tx-Gi-p5e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRG-dX-C5k">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="-Project.name-" id="fgi-p2-jKy">
+                                        <barButtonItem key="leftBarButtonItem" title="Overview" id="b0t-RM-wWh">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="wUS-1c-VO4"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Edit" id="MEb-em-85Y"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FkX-tL-oHR">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="add" id="28k-qH-Mnd"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ZEF-iX-BDw"/>
+                                    <barButtonItem title="Total X:XX" id="5nK-7G-2LO"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="3hM-qY-ten"/>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="2jR-uq-tl8"/>
+                                </items>
+                            </toolbar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6bc-rf-fHW">
+                                <rect key="frame" x="0.0" y="44" width="375" height="579"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProjectsTasksCell" id="0cB-Pb-b0D">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0cB-Pb-b0D" id="tQS-ri-QNp">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="FRG-dX-C5k" secondAttribute="trailing" id="40W-Qf-DXM"/>
+                            <constraint firstItem="FRG-dX-C5k" firstAttribute="top" secondItem="3Tx-Gi-p5e" secondAttribute="top" id="4Nh-l4-JWq"/>
+                            <constraint firstItem="FkX-tL-oHR" firstAttribute="top" secondItem="6bc-rf-fHW" secondAttribute="bottom" id="7It-df-Q9j"/>
+                            <constraint firstItem="FRG-dX-C5k" firstAttribute="leading" secondItem="3Tx-Gi-p5e" secondAttribute="leading" id="CgY-LE-L1Y"/>
+                            <constraint firstItem="FRG-dX-C5k" firstAttribute="trailing" secondItem="6bc-rf-fHW" secondAttribute="trailing" id="QY1-mz-E0s"/>
+                            <constraint firstItem="6bc-rf-fHW" firstAttribute="trailing" secondItem="FkX-tL-oHR" secondAttribute="trailing" id="gW2-d7-XSy"/>
+                            <constraint firstItem="FRG-dX-C5k" firstAttribute="leading" secondItem="6bc-rf-fHW" secondAttribute="leading" id="lUz-lF-JyW"/>
+                            <constraint firstItem="FkX-tL-oHR" firstAttribute="bottom" secondItem="UTO-6Q-djR" secondAttribute="bottom" id="vMq-mX-prv"/>
+                            <constraint firstItem="6bc-rf-fHW" firstAttribute="leading" secondItem="FkX-tL-oHR" secondAttribute="leading" id="vew-9j-4Nb"/>
+                            <constraint firstItem="6bc-rf-fHW" firstAttribute="top" secondItem="FRG-dX-C5k" secondAttribute="bottom" id="wbl-D3-Hwn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="UTO-6Q-djR"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableViewTasks" destination="6bc-rf-fHW" id="YAF-jm-y1v"/>
+                        <outlet property="titleLabel" destination="fgi-p2-jKy" id="zzd-Hf-DVg"/>
+                        <outlet property="totalTimeLabel" destination="5nK-7G-2LO" id="RgH-ax-xgr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yKZ-vJ-w8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-167" y="-654"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -117,6 +188,7 @@
                         <outlet property="tableViewProjects" destination="Sdz-OQ-047" id="0b0-ZA-Xef"/>
                         <outlet property="totalTimeLabel" destination="efR-QQ-S3S" id="u2h-io-id0"/>
                         <segue destination="AvE-KH-4Nq" kind="presentation" identifier="showAllTasks" id="5x5-CX-58f"/>
+                        <segue destination="OZk-LQ-Y0N" kind="presentation" identifier="showDetailProject" id="KrD-Ap-fC4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -242,6 +314,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hu0-uq-Xii"/>
+        <segue reference="wUS-1c-VO4"/>
     </inferredMetricsTieBreakers>
 </document>
