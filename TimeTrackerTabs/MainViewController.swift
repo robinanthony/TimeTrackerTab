@@ -116,7 +116,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
-        loadDataInCoreData();
     }
     
     func loadDataInCoreData() {

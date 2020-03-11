@@ -32,6 +32,10 @@ class DetailProjectViewController: UIViewController, UITableViewDataSource, UITa
         performSegue(withIdentifier: "addNewTask", sender: self);
     }
     
+    @IBAction func handleOverview(_ sender: Any) {
+        performSegue(withIdentifier: "unwindToMainWithSegue", sender: self);
+    }
+    
     func loadDataInCoreData(){
         // get dans CoreData la liste des tâches du projet donné
         self.currentTasks = [];

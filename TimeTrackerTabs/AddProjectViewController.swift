@@ -14,6 +14,10 @@ class AddProjectViewController: UIViewController {
     
     @IBOutlet weak var newProjectName: UITextField!;
     
+    @IBAction func handleCancel(_ sender: Any) {
+        self.performSegue(withIdentifier: "unwindToMain", sender: self);
+    }
+    
     @IBAction func saveNewProject(_ sender: Any) {
         if newProjectName.text != "" {
             print("Création d'un nouveau projet : "+newProjectName.text!);

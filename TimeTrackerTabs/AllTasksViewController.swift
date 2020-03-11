@@ -17,6 +17,10 @@ class AllTasksViewController: UIViewController, UITableViewDataSource, UITableVi
     var allProjects: [Project] = [];
     var allTasks: [Project: [Task]] = [:];
     
+    @IBAction func handleOverview(_ sender: Any) {
+        performSegue(withIdentifier: "unwindToMain", sender: self);
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         // le nombre de section / projets
         return allProjects.count;
