@@ -115,20 +115,39 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl();
+        
+        refreshControl.addTarget(self, action: #selector(MainViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged);
+        
+        refreshControl.tintColor = UIColor.blue;
+        return refreshControl;
+    }();
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl){
+        self.loadDataInCoreData();
+        self.tableViewProjects.reloadData();
+        refreshControl.endRefreshing();
+    }
+    
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
+        loadDataInCoreData();
+        self.tableViewProjects.reloadData();
     }
     
     func loadDataInCoreData() {
         //        createMoocData();
         getFixedProjectsList();
         getUserProjectsList();
+        print("Passage dans loadDataInCoreData()");
     }
     
     override func viewDidLoad() {
         super.viewDidLoad();
         // Do any additional setup after loading the view, typically from a nib.
-        tableViewProjects.dataSource = self;
-        tableViewProjects.delegate = self;
+        self.tableViewProjects.dataSource = self;
+        self.tableViewProjects.delegate = self;
+        self.tableViewProjects.addSubview(self.refreshControl);
         
         loadDataInCoreData();
         self.totalTimeLabel.title = "Total 0:00";
