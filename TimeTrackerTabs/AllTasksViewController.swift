@@ -54,7 +54,7 @@ class AllTasksViewController: UIViewController, UITableViewDataSource, UITableVi
         let currentProject = self.allProjects[indexPath.section];
         let currentTask = self.allTasks[currentProject]![indexPath.row];
         
-        print("Clic sur la tâche : "+currentTask.name!+" du projet : "+currentProject.name!);
+        print("INFOS : AllTasksViewController : Clic sur la tâche : "+currentTask.name!+" du projet : "+currentProject.name!);
     }
     
     func loadDataInCoreData(){
@@ -68,6 +68,7 @@ class AllTasksViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         catch {
             resultProject = [];
+            print("ERROR : AllTasksViewController : problème rencontré lors de la récupération du projet 'Single Task'.");
         }
         
         let requeteBis:NSFetchRequest<Project> = Project.fetchRequest();
@@ -79,6 +80,7 @@ class AllTasksViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         catch {
             resultProject = [];
+            print("ERROR : AllTasksViewController : problème rencontré lors de la récupération des projets utilisateurs.");
         }
         
         self.allProjects = resultProject;
@@ -100,16 +102,4 @@ class AllTasksViewController: UIViewController, UITableViewDataSource, UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

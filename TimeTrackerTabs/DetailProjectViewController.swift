@@ -14,6 +14,8 @@ class DetailProjectViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var totalTimeLabel: UIBarButtonItem!
     @IBOutlet weak var titleLabel: UINavigationItem!
     
+    let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
+    
     var currentProject: Project! = nil;
     var currentTasks: [Task] = [];
     
@@ -38,7 +40,19 @@ class DetailProjectViewController: UIViewController, UITableViewDataSource, UITa
     
     func loadDataInCoreData(){
         // get dans CoreData la liste des tâches du projet donné
-        self.currentTasks = [];
+        let requete:NSFetchRequest<Task> = Task.fetchRequest();
+        requete.returnsObjectsAsFaults = false;
+        var results:[Task];
+        do {
+            requete.predicate = NSPredicate(format: "project == %@", currentProject!.name!);
+            results = try context.fetch(requete);
+        }
+        catch {
+            results = [];
+            print("ERROR : DetailProjectViewController : problème rencontré lors de la récupération des tâches liés à un projet.");
+        }
+        
+        self.currentTasks = results;
     }
     
     override func viewDidLoad() {

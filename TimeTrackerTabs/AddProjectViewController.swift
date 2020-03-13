@@ -20,7 +20,7 @@ class AddProjectViewController: UIViewController {
     
     @IBAction func saveNewProject(_ sender: Any) {
         if newProjectName.text != "" {
-            print("Création d'un nouveau projet : "+newProjectName.text!);
+            print("INFOS : AddProjectViewController : Création d'un nouveau projet : "+newProjectName.text!);
             
             let newProject = Project(context: context);
             newProject.name = newProjectName.text;
@@ -45,9 +45,9 @@ class AddProjectViewController: UIViewController {
     func saveData() -> Void {
         do {
             try context.save();
-            print("Save in database CoreData successful");
+            print("INFOS : Save in database CoreData successful");
         } catch {
-            print("Error while saving with CoreData : \(error)");
+            print("ERROR : AddProjectViewController : Error while saving with CoreData : \(error)");
         }
     }
 }

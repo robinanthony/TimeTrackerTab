@@ -44,7 +44,7 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     @IBAction func handleSave(_ sender: Any) {
-        print("appuie sur la touche 'save'");
+        print("INFOS : AddTaskViewController : appuie sur la touche 'save'.");
     }
     
     func loadDataInCoreData(){
@@ -57,7 +57,9 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             requete.predicate = NSPredicate(format: "name == %@", "Single Tasks");
             results.append(contentsOf: try context.fetch(requete));
         }
-        catch {}
+        catch {
+            print("ERROR : AddTaskViewController : problème rencontré lors de la récupération du projet 'Single Task'.");
+        }
         
         let requeteBis:NSFetchRequest<Project> = Project.fetchRequest();
         requeteBis.returnsObjectsAsFaults = false;
@@ -65,7 +67,9 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             requeteBis.predicate = NSPredicate(format: "type == %@", "user");
             results.append(contentsOf: try context.fetch(requeteBis));
         }
-        catch {}
+        catch {
+            print("ERROR : AddTaskViewController : problème rencontré lors de la récupération des projets utilisateurs.");
+        }
         
         self.allProject = results;
     }
@@ -83,11 +87,8 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         for (index, testProject) in self.allProject.enumerated() {
             if testProject == self.originalSelectedProject {
                 self.currentSelectedProject = index;
-                print("Index du projet demandé trouvé ! ");
             }
         }
-        
-        print("Le projet se trouve à l'index ",self.currentSelectedProject,"/",self.allProject.count);
         
         pickerViewProjects.selectRow(self.currentSelectedProject, inComponent: 0, animated: true);
     }

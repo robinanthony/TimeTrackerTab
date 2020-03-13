@@ -12,7 +12,7 @@ import CoreData
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var totalTimeLabel: UIBarButtonItem!
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
     
     @IBOutlet weak var tableViewProjects: UITableView!
     
@@ -25,11 +25,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var segueCurrentProject: Project! = nil;
     
     @IBAction func handleAbout(_ sender: Any) {
-        print("De quoi parle cette application ?");
+        print("INFOS : MainViewController : De quoi parle cette application ?");
     }
     
     @IBAction func handleAllProjectEdit(_ sender: Any) {
-        print("Ze veut editer tous les projets !");
+        print("INFOS : MainViewController : veut editer tous les projets !");
     }
     
     @IBAction func handleAddProject(_ sender: Any) {
@@ -37,7 +37,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @IBAction func handleQuickStart(_ sender: Any) {
-        print("Ze veut une nouvelle tache dans single tache avec un 'chrono' qui se débute immédiatement");
+        print("INFOS : MainViewController : veut une nouvelle tache dans single tache avec un 'chrono' qui se débute immédiatement");
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -96,7 +96,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // gestion des clics sur une cellule
         if indexPath.section == 0{
-            print("clic sur une tâche en cours : "+self.currentOpenTasks[indexPath.row].name!);
+            print("INFOS : MainViewController : sur une tâche en cours : "+self.currentOpenTasks[indexPath.row].name!);
         }
         if indexPath.section == 1 {
             if indexPath.row == 0 {
@@ -106,12 +106,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 self.segueCurrentProject = self.fixedProjects[indexPath.row];
                 performSegue(withIdentifier: "showDetailProject", sender: self);
             }
-            print("clic sur fixed project : "+self.fixedProjects[indexPath.row].name!);
+            print("INFOS : MainViewController : sur fixed project : "+self.fixedProjects[indexPath.row].name!);
         }
         if indexPath.section == 2 {
             self.segueCurrentProject = self.currentProjects[indexPath.row];
             performSegue(withIdentifier: "showDetailProject", sender: self);
-            print("clic sur user project : "+self.currentProjects[indexPath.row].name!);
+            print("INFOS : MainViewController : sur user project : "+self.currentProjects[indexPath.row].name!);
         }
     }
     
@@ -139,7 +139,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //        createMoocData();
         getFixedProjectsList();
         getUserProjectsList();
-        print("Passage dans loadDataInCoreData()");
     }
     
     override func viewDidLoad() {
@@ -164,10 +163,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         catch {
             results = [];
+            print("ERROR : MainViewController : problème rencontré lors de la récupération des projets 'fixes'.");
         }
         
         if results.count == 0 {
-            print("Si premier allumage, les projets 'fixent' n'existent pas et doivent être créés.");
+            print("INFOS : MainViewController : Si premier allumage, les projets 'fixent' n'existent pas et doivent être créés.");
             let allTasks = Project(context: context);
             allTasks.name = "All Tasks";
             allTasks.type = "fixed";
@@ -195,6 +195,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         catch {
             results = [];
+            print("ERROR : MainViewController : problème rencontré lors de la récupération des projets utilisateurs.");
         }
         
         self.currentProjects = results;
@@ -217,7 +218,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         do {
             try context.execute(batchDeleteRequest);
-        } catch {}
+        } catch {
+            print("ERROR : MainViewController : problème rencontré lors de la suppression des projets.");
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -228,9 +231,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func saveData() -> Void {
         do {
             try context.save()
-            print("Save in database CoreData successful")
+            print("INFOS : MainViewController : Save in database CoreData successful")
         } catch {
-            print("Error while saving with CoreData : \(error)")
+            print("ERROR : MainViewController : Error while saving with CoreData : \(error)")
         }
     }
     
