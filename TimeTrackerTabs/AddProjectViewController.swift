@@ -19,10 +19,10 @@ class AddProjectViewController: UIViewController {
     }
     
     @IBAction func saveNewProject(_ sender: Any) {
-        if newProjectName.text != "" {
-            print("INFOS : AddProjectViewController : Création d'un nouveau projet : "+newProjectName.text!);
+        if self.newProjectName.text != "" {
+            print("INFOS : AddProjectViewController : Création d'un nouveau projet : "+self.newProjectName.text!);
             
-            let newProject = Project(context: context);
+            let newProject = Project(context: self.context);
             newProject.name = newProjectName.text;
             newProject.type = "user";
             

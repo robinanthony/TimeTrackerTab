@@ -143,8 +143,10 @@
                         <viewLayoutGuide key="safeArea" id="P5t-Ow-UQ0"/>
                     </view>
                     <connections>
+                        <outlet property="newTaskName" destination="WfN-jh-A3E" id="d05-3K-N8t"/>
                         <outlet property="pickerViewProjects" destination="Srg-6X-Eql" id="2rP-me-kTP"/>
                         <segue destination="AR0-Ku-jOE" kind="unwind" identifier="unwindToDetailProject" unwindAction="unwindToDetailProjectWithSegue:" id="61P-Hf-Qlb"/>
+                        <segue destination="AR0-Ku-jOE" kind="unwind" identifier="unwindToMain" unwindAction="unwindToMainWithSegue:" id="E63-JV-upz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ve-IJ-Kj9" userLabel="First Responder" sceneMemberID="firstResponder"/>

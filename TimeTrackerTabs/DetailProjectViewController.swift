@@ -44,14 +44,13 @@ class DetailProjectViewController: UIViewController, UITableViewDataSource, UITa
         requete.returnsObjectsAsFaults = false;
         var results:[Task];
         do {
-            requete.predicate = NSPredicate(format: "project == %@", currentProject!.name!);
-            results = try context.fetch(requete);
+            requete.predicate = NSPredicate(format: "project.name == %@", self.currentProject!.name!);
+            results = try self.context.fetch(requete);
         }
         catch {
             results = [];
             print("ERROR : DetailProjectViewController : problème rencontré lors de la récupération des tâches liés à un projet.");
         }
-        
         self.currentTasks = results;
     }
     
@@ -73,6 +72,7 @@ class DetailProjectViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBAction func unwindToDetailProject(segue: UIStoryboardSegue) {
         loadDataInCoreData();
+        self.tableViewTasks.reloadData();
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

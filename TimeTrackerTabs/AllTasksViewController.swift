@@ -28,8 +28,8 @@ class AllTasksViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // le nombre de sous-section pour une section : le nombre de tâche par projet
-//        return self.allTasks[self.allProjects[section]]!.count;
-        return 0;
+        return self.allTasks[self.allProjects[section]]!.count;
+//        return 0;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,7 +75,6 @@ class AllTasksViewController: UIViewController, UITableViewDataSource, UITableVi
         requeteBis.returnsObjectsAsFaults = false;
         do {
             requeteBis.predicate = NSPredicate(format: "type == %@", "user");
-//            requeteBis.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)];
             resultProject.append(contentsOf: try context.fetch(requeteBis));
         }
         catch {
@@ -84,9 +83,23 @@ class AllTasksViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         self.allProjects = resultProject;
-        self.allTasks = Dictionary(uniqueKeysWithValues: zip(resultProject, []));
+//        self.allTasks = Dictionary(uniqueKeysWithValues: zip(resultProject, []));
         
         // TODO : Récuperer la liste de tâches pour chaque projets du dico
+        for p in self.allProjects {
+            var resultTask: [Task] = [];
+            let requeteTask:NSFetchRequest<Task> = Task.fetchRequest();
+            requeteTask.returnsObjectsAsFaults = false;
+            do {
+                requeteTask.predicate = NSPredicate(format: "project.name == %@", p.name!);
+                resultTask.append(contentsOf: try context.fetch(requeteTask));
+            }
+            catch {
+                resultTask = [];
+                print("ERROR : AllTasksViewController : problème rencontré lors de la récupération des tasks du projet "+p.name!+".");
+            }
+            self.allTasks[p] = resultTask;
+        }
     }
     
     override func viewDidLoad() {

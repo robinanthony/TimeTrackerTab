@@ -11,6 +11,7 @@ import CoreData
 
 class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var pickerViewProjects: UIPickerView!
+    @IBOutlet weak var newTaskName: UITextField!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -44,7 +45,39 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     @IBAction func handleSave(_ sender: Any) {
-        print("INFOS : AddTaskViewController : appuie sur la touche 'save'.");
+        if self.newTaskName.text != "" {
+            print("INFOS : AddTaskViewController : ajout d'une tâche "+self.newTaskName.text!+" dans le projet "+self.allProject[self.currentSelectedProject].name!+".");
+            
+            let newTache = Task(context: self.context);
+            newTache.name = self.newTaskName.text;
+            
+            var results:[Project] = [];
+            let requete:NSFetchRequest<Project> = Project.fetchRequest();
+            requete.returnsObjectsAsFaults = false;
+            do {
+                requete.predicate = NSPredicate(format: "name == %@", self.allProject[self.currentSelectedProject].name!);
+                results.append(contentsOf: try context.fetch(requete));
+            }
+            catch {
+                print("ERROR : AddTaskViewController : problème rencontré lors de la récupération du projet lors de l'ajout d'une tâche.");
+            }
+            
+            if (results.count == 1){
+                newTache.project = results[0];
+                saveData();
+                
+                if self.unwindIdentifier != "" {
+                    self.performSegue(withIdentifier: self.unwindIdentifier, sender: self);
+                }
+                else {
+                    print("ERROR : AddTaskViewController : Aucun unwind précisé, retour vers le MainViewController.");
+                    self.performSegue(withIdentifier: "unwindToMain", sender: self);
+                }
+            }
+            else{
+                print("ERROR : AddTaskViewController : plusieurs projets récupéré lors de la tentative d'ajout d'une tâche. Action impossible.");
+            }
+        }
     }
     
     func loadDataInCoreData(){
@@ -96,5 +129,14 @@ class AddTaskViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func saveData() -> Void {
+        do {
+            try context.save();
+            print("INFOS : AddTaskViewController : Save in database CoreData successful");
+        } catch {
+            print("ERROR : AddTaskViewController : Error while saving with CoreData : \(error)");
+        }
     }
 }
